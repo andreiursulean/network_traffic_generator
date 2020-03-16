@@ -10,25 +10,35 @@
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
 
-        <script src="airports.jsonp"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.geodesic"></script>
+
+        <script src="defines.js"></script> 
+        <script src="Flight.js"></script> 
+        <script src="Conflict.js"></script>
         <script src="main.js"></script>
     </head>
 
     <body>
-
-        
-
         <div id="background">
             <div id="wrapper">
                 <h1>ATM Group 8</h1>
                 <hr />
                 <div id="firstRow">
-                    <label for="n">n = </label>
-                    <input type="text" id="n" name="n">
-                    <button id="runButton">Generate</button>
+                    <div id="firstRowLeft">
+                        <label for="n">n = </label>
+                        <input type="text" id="n" name="n">
+                        <label for="t">deltaT = </label>
+                        <input type="text" id="t" name="t">
+                    </div>
+                    <button id="runButton" onclick="main()">Generate</button>
                 </div>
 
                 <div id="mapid"></div>
+
+                <table id="flightsTable"></table>
+                <table id="conflictsTable"></table>                    
+
+                <div id="timelineWrapper"></div>
             </div>
         </div>
     </body>
