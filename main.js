@@ -3,10 +3,10 @@ function main()
 {
     // Read inputs
 
-    let deltaT = 8600;
-    let n = 100;
-    //let deltaT = parseInt(document.getElementById('t').value);
-    //let n = parseInt(document.getElementById('n').value);
+    //let deltaT = 8600;
+    //let n = 100;
+    let deltaT = parseInt(document.getElementById('t').value);
+    let n = parseInt(document.getElementById('n').value);
     
     // Generate map and display airport markers
     let mainmap = createMap();
@@ -42,8 +42,8 @@ function showAirportsOnMap(map) {
     let markers = [];
 
     for (let i = 0; i < airports.length; i++) {
-        let lat = parseFloat(airports[i].latitude);
-        let lng = parseFloat(airports[i].longitude);
+        let lat = airports[i].lat;
+        let lng = airports[i].lng;
 
         markers.push(L.marker([lat, lng]).addTo(map).bindPopup(airports[i].icao));
     }
@@ -58,11 +58,7 @@ function createFlights(n) {
 
         // Set destination airport
         let destinationIndex = Math.round(Math.random() * (APRT_LENGTH - 1));
-        let ades = {
-            icao: airports[destinationIndex].icao,
-            lat: parseFloat(airports[destinationIndex].latitude),
-            lng: parseFloat(airports[destinationIndex].longitude),
-        };
+        let ades = airports[destinationIndex];
 
         // Set departure airport
         
@@ -73,11 +69,7 @@ function createFlights(n) {
             ;
         }
 
-        let adep = {
-            icao: airports[departureIndex].icao,
-            lat: parseFloat(airports[departureIndex].latitude),
-            lng: parseFloat(airports[departureIndex].longitude),
-        };
+        let adep = airports[departureIndex];
 
         // Set time 
         let atd = new Date();
@@ -104,7 +96,9 @@ function showFlightsOnMap(flights, map) {
     geodesicLines = [];
     
     for (let i = 0; i < flights.length; i++) {
-        geodesicLines.push(new L.Geodesic([flights[i].adep, flights[i].ades]).addTo(map));
+        adep = new L.LatLng(flights[i].adep.lat, flights[i].adep.lng);
+        ades = new L.LatLng(flights[i].ades.lat, flights[i].ades.lng);
+        geodesicLines.push(new L.Geodesic([adep, ades]).addTo(map));
     }
 
     return geodesicLines;

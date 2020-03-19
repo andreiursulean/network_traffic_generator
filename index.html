@@ -20,15 +20,14 @@
     <body>
         <div id="background">
             <div id="wrapper">
-                <h1>ATM Group 8</h1>
-                <hr />
-                <div id="firstRow">
-                    <div id="firstRowLeft">
-                        <label for="n">n = </label>
-                        <input type="text" id="n" name="n">
-                        <label for="t">deltaT = </label>
-                        <input type="text" id="t" name="t">
-                    </div>
+                <div id="header">
+                    <h1>Network Traffic Generator</h1>
+                    <h2>ATM Group 8</h2>
+                    <hr />
+                </div>
+                <div id="inputsWrapper">
+                    <input type="text" id="n" name="n" value="Number of ACFT">
+                    <input type="text" id="t" name="t" value="Time Parameter" >
                     <button id="runButton" onclick="main()">Generate</button>
                 </div>
 
@@ -38,6 +37,7 @@
                 <table id="conflictsTable"></table>                    
 
                 <div id="timelineWrapper"></div>
+                <div id="footer"></div>
             </div>
         </div>
     </body>

@@ -1,35 +1,49 @@
 
-#background {
-    background-color: #fff;
+html, #background {
+    background-color: #f7f7f7;
     height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
+
 #wrapper {
     max-width: 1000px;
-    padding: 10px;
+    padding: 0;
     margin: auto;
     background-color: #fff;
     border-radius: 5px;
 }
 
-#firstRow {
+#header {
+    margin: 0;
+    padding: 10px;
+    /*background-color: #e9a4ed;*/
+}
+
+#inputsWrapper {
     padding: 20px;
 }
 
-#firstRowLeft {
+#inputsWrapper > * {
+    width: 30%;
+    box-sizing: border-box;
     display: inline-block;
-}
+    padding: 10px;
+    height: 40px;
+    margin: 10px;
+    border-radius: 10px;
+}    
 
 #runButton {
-    background-color: #4CAF50;
-    color: #fff;
-    float: right;
-    padding: 10px;
-    border-radius: 10px;
     border: 0;
+    background-color: #d35ada;
+    color: #fff;
+
 }
 
 #runButton:hover {
-    background-color: rgb(41, 124, 43);
+    background-color: #ad22b4;
 }
 
 #mapid {
@@ -38,7 +52,7 @@
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #e9a4ed;
     color: white;
     padding: 15px;
 }
