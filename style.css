@@ -9,17 +9,58 @@ html, #background {
 
 #wrapper {
     max-width: 1000px;
+    min-height: 800px;
     padding: 0;
     margin: auto;
     background-color: #fff;
     border-radius: 5px;
 }
 
-#header {
+#body, #header {
     margin: 0;
     padding: 10px;
-    /*background-color: #e9a4ed;*/
 }
+
+#body {
+    display: none;
+}
+/* Tab Menu */
+
+.tab {
+    overflow:hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    width: 50%;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* End Tab Menu */
+
+/* Inputs */
 
 #inputsWrapper {
     padding: 20px;
@@ -39,20 +80,47 @@ html, #background {
     border: 0;
     background-color: #d35ada;
     color: #fff;
-
 }
 
 #runButton:hover {
     background-color: #ad22b4;
 }
 
+/* End of Inputs */
+
+
+#refreshButton {
+    width: 30%;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 40px;
+    margin: 20px 33%;
+    border-radius: 10px;
+    border: 0;
+    background-color: #d35ada;
+    color: #fff;
+}
+
+#refreshButton:hover {
+    background-color: #ad22b4;
+}
+
+
 #mapid {
     margin: auto;
     height: 600px;
 }
 
+/* Table */
+
+#tableWrapper {
+    overflow: scroll;
+    margin: auto;
+    height: 600px;
+}
+
 th {
-    background-color: #e9a4ed;
+    background-color: #d35ada;
     color: white;
     padding: 15px;
 }
@@ -70,3 +138,4 @@ tr.conflict {
     background-color: #f54747;
 }
 
+/* End of Table */
