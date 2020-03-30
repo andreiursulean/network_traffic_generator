@@ -40,7 +40,7 @@ html, #background {
     cursor: pointer;
     padding: 14px 16px;
     transition: 0.3s;
-    width: 50%;
+    width: 33.3%;
 }
 
 .tab button:hover {
@@ -93,8 +93,9 @@ html, #background {
     width: 30%;
     box-sizing: border-box;
     padding: 10px;
+    display: inline-block;
     height: 40px;
-    margin: 20px 33%;
+    margin: 20px 11%;
     border-radius: 10px;
     border: 0;
     background-color: #d35ada;
@@ -105,6 +106,22 @@ html, #background {
     background-color: #ad22b4;
 }
 
+#autosolveButton {
+    width: 30%;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 10px;
+    height: 40px;
+    margin: 20px 8%;
+    border-radius: 10px;
+    border: 0;
+    background-color: #d35ada;
+    color: #fff;
+}
+
+#autosolveButton:hover {
+    background-color: #ad22b4;
+}
 
 #mapid {
     margin: auto;

@@ -11,9 +11,15 @@
    crossorigin=""></script>
 
         <script src="https://cdn.jsdelivr.net/npm/leaflet.geodesic"></script>
+        
+        <script src="Chart.js"></script>
+        <link rel="stylesheet" type="text/css" href="Chart.css" />
 
+        <script src="aircraft.js"></script>
+        <script src="airports.js"></script>
         <script src="defines.js"></script> 
         <script src="Flight.js"></script> 
+        <script src="util.js"></script>
         <script src="main.js"></script>
     </head>
 
@@ -28,15 +34,15 @@
                 
                 <div id="inputsWrapper">
                     <input type="text" id="n" name="n" placeholder="Number of ACFT">
-                    <input type="text" id="t" name="t" placeholder="Time Parameter" >
+                    <input type="text" id="t" name="t" placeholder="Time Parameter (in seconds)" >
                     <button id="runButton" onclick="main()">Generate</button>
                 </div>
 
                 <div id="body">                    
                     <div class="tab">
-                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="defaultOpen">Map</button>
-                       <!-- <button class="tablinks" onClick="openTab(event, 'mapWrapper2')">Map2</button>-->
+                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="defaultOpen">Map</button>                       
                         <button class="tablinks" onClick="openTab(event, 'tableWrapper')">Table</button>
+                        <button class="tablinks" onClick="openTab(event, 'statisticsWrapper')">Statistics</button>
                     </div>
                     
                     <div id="mapWrapper" class="tabcontent">
@@ -47,7 +53,13 @@
                         <table id="flightsTable"></table>
                     </div>
 
+                    <div id="statisticsWrapper" class="tabcontent">
+                        <canvas id="statisticsChart" width="600" height="400"></canvas>
+                    </div>
+
                     <button id="refreshButton" onclick="location.reload();">Run again</button>
+
+                    <button id="autosolveButton" onclick="autosolve();">Autosolve (experimental)</button>
 
                     <script>
                          document.getElementById('defaultOpen').click();
