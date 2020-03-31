@@ -88,42 +88,27 @@ html, #background {
 
 /* End of Inputs */
 
-
-#refreshButton {
+.pinkButton {
     width: 30%;
     box-sizing: border-box;
     padding: 10px;
     display: inline-block;
     height: 40px;
-    margin: 20px 11%;
+    margin: 20px 9%;
     border-radius: 10px;
     border: 0;
     background-color: #d35ada;
     color: #fff;
 }
 
-#refreshButton:hover {
+.pinkButton:hover {
     background-color: #ad22b4;
 }
 
-#autosolveButton {
-    width: 30%;
-    box-sizing: border-box;
-    display: inline-block;
-    padding: 10px;
-    height: 40px;
-    margin: 20px 8%;
-    border-radius: 10px;
-    border: 0;
-    background-color: #d35ada;
-    color: #fff;
+#animationButton {
+    margin: 10px 35%;
 }
-
-#autosolveButton:hover {
-    background-color: #ad22b4;
-}
-
-#mapid {
+.map {
     margin: auto;
     height: 600px;
 }

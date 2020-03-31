@@ -19,6 +19,7 @@
         <script src="airports.js"></script>
         <script src="defines.js"></script> 
         <script src="Flight.js"></script> 
+        <script src="Conflict.js"></script>
         <script src="util.js"></script>
         <script src="main.js"></script>
     </head>
@@ -40,13 +41,14 @@
 
                 <div id="body">                    
                     <div class="tab">
-                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="defaultOpen">Map</button>                       
+                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="defaultOpen">Map</button>
                         <button class="tablinks" onClick="openTab(event, 'tableWrapper')">Table</button>
                         <button class="tablinks" onClick="openTab(event, 'statisticsWrapper')">Statistics</button>
                     </div>
                     
                     <div id="mapWrapper" class="tabcontent">
-                        <div id="mapid"></div>
+                        <div id="mapid" class="map"></div>
+                        <button class="pinkButton" id="animationButton" onclick="animNextState()">Next</button>
                     </div>
 
                     <div id="tableWrapper" class="tabcontent">
@@ -57,9 +59,9 @@
                         <canvas id="statisticsChart" width="600" height="400"></canvas>
                     </div>
 
-                    <button id="refreshButton" onclick="location.reload();">Run again</button>
+                    <button class="pinkButton" id="refreshButton" onclick="location.reload();">Run again</button>
 
-                    <button id="autosolveButton" onclick="autosolve();">Autosolve (experimental)</button>
+                    <button class="pinkButton" id="autosolveButton" onclick="autosolve();">Autosolve (experimental)</button>
 
                     <script>
                          document.getElementById('defaultOpen').click();

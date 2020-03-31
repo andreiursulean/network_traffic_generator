@@ -25,12 +25,12 @@ const aircraft = [
         "cruiseSpeed":455
     },
     {   "manufacturer":"Gulfstream Aerospace",
-        "typeDesignators":"GA6C",
+        "typeDesignator":"GA6C",
         "model":"Gulfstream G600",
         "cruiseSpeed":566 
     },
     {   "manufacturer":"Cessna",
-        "typeDesignators":"C56X",
+        "typeDesignator":"C56X",
         "model":"Citation XLS+",
         "cruiseSpeed":441
     },

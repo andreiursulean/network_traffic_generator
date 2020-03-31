@@ -1,6 +1,8 @@
+// TODO de facut librarie
 
-function createMap() {
-    var map = L.map('mapid').setView([55.505, 23.09], 4);
+
+function createMap(id) {
+    var map = L.map(id).setView([55.505, 23.09], 4);
 
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -78,19 +80,40 @@ function showFlightsOnMap(flights, map) {
 function sortFlights(flights) {
     for (let i = 0; i < flights.length - 1; i++)
         for (let j = i + 1; j < flights.length; j++)
-            if (flights[i].eta > flights[j].eta) {
+            if (flights[i].ades.icao > flights[j].ades.icao) {
                 let aux = flights[i];
                 flights[i] = flights[j];
                 flights[j] = aux;
             }
+
+    for (let i = 0; i < flights.length - 1; i++)
+        for (let j = i + 1; j < flights.length; j++)
+            if (flights[i].ades.icao === flights[j].ades.icao && flights[i].eta > flights[j].eta) {
+                let aux = flights[i];
+                flights[i] = flights[j];
+                flights[j] = aux;
+            }            
 }
 
 function findConflicts(flights, deltaT) {
     conflicts = [];
 
-    for (let i = 1; i < flights.length - 1; i++)
-        if ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000))
-            conflicts.push(i);
+    for (let i = 1; i < flights.length - 1; i++) {
+        console.log(i);
+
+        if ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000)) {
+            tmp = new Conflict();
+            tmp.push({"flight": flights[i], "number": i});
+
+            while ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000) && (i < flights.length)) {
+                i++;
+                tmp.push({"flight": flights[i], "number": i});
+                
+            }
+            
+            conflicts.push(tmp);
+        }
+    }
 
     return conflicts;
     
@@ -101,7 +124,13 @@ function printFlightsTable(flights, conflicts) {
 
     for (let i = 0; i < flights.length; i++) {
 
-        if (checkElementInArray(i, conflicts) || checkElementInArray(i - 1, conflicts)) {
+        let isConflict = false;
+        for (let j = 0; j < conflicts.length; j++)
+            if (checkElementInArray(i, conflicts[j].numbers)) {
+                isConflict = true;
+            }
+
+        if (isConflict) {
             tableString += '<tr class="conflict"><td>' + i + '</td><td>' + flights[i].ades.icao + '</td><td>' + flights[i].adep.icao + '</td><td>' + 
             flights[i].atd + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
             flights[i].distance + '</td><td>' + flights[i].ete + '</td><td>' + flights[i].eta + '</td></tr>';
@@ -158,6 +187,7 @@ function drawCharts(conflictData) {
             scales: {
                 yAxes: [{
                     ticks: {
+                        stepSize: 1,
                         beginAtZero: true
                     }
                 }]
@@ -167,5 +197,69 @@ function drawCharts(conflictData) {
 }
 
 function autosolve() {
-    alert("UNIMPLEMENTED");
+    alert("UNIMPLEMENTED"); // TODO IMPLEMENT
+}
+
+function compileConflictData(conflicts, flights) {
+    let conflictData = {
+        labels: [],
+        datasets: [{
+            label: "Conflicts",
+            data: [],
+            backgroundColor: [],
+            borderColor: [],
+            borderWidth: 1
+        }]
+    };
+
+    for (let i = 0; i < conflicts.length; i++) {
+        let index = conflictData.labels.indexOf(conflicts[i].flights[0].ades.icao);//flights[conflicts[i].numbers[0]].ades.icao);
+
+        if (index >= 0) {
+            conflictData.datasets[0].data[index] += conflicts[i].numbers.length;            
+        }
+        else {
+            conflictData.labels.push(conflicts[i].flights[0].ades.icao);
+            let index = conflictData.labels.length - 1;
+            conflictData.datasets[0].data[index] = conflicts[i].numbers.length;
+            conflictData.datasets[0].backgroundColor[index] = 'rgba(153, 102, 255, 0.2)';
+            conflictData.datasets[0].borderColor[index] = 'rgba(153, 102, 255, 1)';
+        }
+    }
+
+    return conflictData;
+}
+
+function animNextState() {
+    let nextState = -1;
+
+    if (state < conflicts.length - 1)
+            nextState = state + 1;
+
+    state = nextState;
+
+    if (state >= 0) {
+        // Remove old flights
+        for (let i = 0; i < geodesicLines.length; i++) {
+            mainmap.removeLayer(geodesicLines[i]);
+        }
+
+        // Draw new flights
+        geodesicLines = showFlightsOnMap(conflicts[state].flights, mainmap);  
+    }    
+    else if (state == -1) {
+        for (let i = 0; i < geodesicLines.length; i++) {
+            mainmap.removeLayer(geodesicLines[i]);
+        }
+
+        geodesicLines = showFlightsOnMap(flights, mainmap);  
+    }
+            
+    console.log(nextState);
+}
+
+function test() {
+    a = new L.LatLng(0, 0);
+    b = new L.LatLng(0, 1);
+    c = new L.Geodesic([a, b]).addTo(mainmap);
 }
