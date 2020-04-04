@@ -96,31 +96,55 @@ function sortFlights(flights) {
 }
 
 function findConflicts(flights, deltaT) {
-    conflicts = [];
+    let conflicts = [];
 
-    for (let i = 1; i < flights.length - 1; i++) {
+    for (let i = 0; i < flights.length - 1; i++) {
+        let tmp = new Conflict();
+        let isConflict = false;
+
+        
+
+        while ((i < flights.length - 1) && (flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000)) {            
+            tmp.push({"flight": flights[i], "number": i});
+            isConflict = true;
+            i++;
+            debugger;
+        }
+
+        tmp.push({"flight": flights[i], "number": i});
+
+        if (isConflict)
+            conflicts.push(tmp);
+    }
+
+    return conflicts;
+
+
+    /*for (i = 1; i < flights.length - 1; i++) {
         console.log(i);
 
         if ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000)) {
             tmp = new Conflict();
             tmp.push({"flight": flights[i], "number": i});
 
-            while ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000) && (i < flights.length)) {
+            while ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000) && (i + 1 < flights.length)) {
                 i++;
                 tmp.push({"flight": flights[i], "number": i});
                 
             }
+
+            // BUG LINE 108
             
             conflicts.push(tmp);
         }
-    }
+    }*/
 
-    return conflicts;
+    
     
 }
 
 function printFlightsTable(flights, conflicts) {
-    let tableString = '<tr><th>No.</th><th>ADES</th><th>ADEP</th><th>ATD</th><th>ACFT</th><th>FL</th><th>Distance</th><th>ETE</th><th>ETA</th></tr>';
+    let tableString = '<tr><th>No.</th><th>ADES</th><th>ADEP</th><th>ATD</th><th>ACFT</th><th>FL</th><th>Distance (NM)</th><th>ETE</th><th>ETA</th></tr>';
 
     for (let i = 0; i < flights.length; i++) {
 
@@ -133,12 +157,12 @@ function printFlightsTable(flights, conflicts) {
         if (isConflict) {
             tableString += '<tr class="conflict"><td>' + i + '</td><td>' + flights[i].ades.icao + '</td><td>' + flights[i].adep.icao + '</td><td>' + 
             flights[i].atd + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
-            flights[i].distance + '</td><td>' + flights[i].ete + '</td><td>' + flights[i].eta + '</td></tr>';
+            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta + '</td></tr>';
         }
         else {
             tableString += '<tr><td>'  + i + '</td><td>' + flights[i].ades.icao + '</td><td>' + flights[i].adep.icao + '</td><td>' + 
             flights[i].atd + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
-            flights[i].distance + '</td><td>' + flights[i].ete + '</td><td>' + flights[i].eta + '</td></tr>';
+            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta + '</td></tr>';
         }
     }
 
@@ -162,7 +186,6 @@ function openTab(evt, tabName) {
     for (let i = 0; i < tabcontent.length; i++) {
         tabcontent[i].style.display = 'none';
     }
-
 
     // set tablinks not active 
     let tablinks = document.getElementsByClassName('tablinks');
@@ -258,8 +281,18 @@ function animNextState() {
     console.log(nextState);
 }
 
-function test() {
-    a = new L.LatLng(0, 0);
-    b = new L.LatLng(0, 1);
-    c = new L.Geodesic([a, b]).addTo(mainmap);
+function secondsToHoursString(n) {
+    let q = Math.floor(n/3600);
+    let r = n - q * 3600;
+    let h = q;
+    q = Math.floor(r / 60);
+    r = r - q * 60;
+    let m = q;
+    let s = Math.floor(r);
+
+    return h + ":" + m + ":" + s;   
+}
+
+function metersToNM(n) {
+    return (n * 0.000539956803).toFixed(2);
 }

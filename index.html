@@ -15,7 +15,6 @@
         <script src="Chart.js"></script>
         <link rel="stylesheet" type="text/css" href="Chart.css" />
         
-        <link rel="stylesheet" type="text/css" href="inputs.css" />
         <link rel="stylesheet" type="text/css" href="style.css" />
         <link rel="stylesheet" type="text/css" href="table.css" />
         <link rel="stylesheet" type="text/css" href="tabs.css" />
@@ -42,13 +41,22 @@
 
                 <div id="intro">
                     <p>
-                        The programm uses a list of European airports to generate random flights between any reasonable ADEP/ADES pairs at random departure times. The program will
-                        <ul>
-                            <li>Calculate arrival times (assume flights on the orthodrome, constant speeds and random cruise flight levels)</li>
-                            <li>Display arrival conflicts (flights arriving at the same ADES within a specified time parameter)</li>
-                        </ul>
-
+                        The program uses a list of European airports to generate random flights between any reasonable ADEP/ADES pairs at random departure times. The program:
                     </p>
+                    <ul>
+                        <li>Calculates arrival times (assume flights on the orthodrome, constant speeds and random cruise flight levels)</li>
+                        <li>Displays arrival conflicts (flights arriving at the same ADES within a specified time parameter)</li>
+                    </ul>
+
+                    <p>
+                        The program will output 3 tabs: Map, Table and Statistics
+                    </p>
+                    <ul>
+                        <li>The map display will show all the flights and allows the user to browse between conflicts </li>
+                        <li>The table display will show all flights and will mark the conflicts with red</li>
+                        <li>The statistics display possible arrival  conflicts per ADES</li>
+                    </ul>
+                    
                 </div>
                 
                 <div id="inputsWrapper">
