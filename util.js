@@ -197,7 +197,7 @@ function drawCharts(conflictData) {
 }
 
 function autosolve() {
-    alert("UNIMPLEMENTED"); // TODO IMPLEMENT
+    alert("This method is not yet implemented. Sorry for any inconvenience"); // TODO IMPLEMENT
 }
 
 function compileConflictData(conflicts, flights) {

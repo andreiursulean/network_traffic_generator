@@ -1,0 +1,28 @@
+/* Table */
+
+#tableWrapper {
+    overflow: scroll;
+    margin: auto;
+    height: 600px;
+}
+
+th {
+    background-color: #d35ada;
+    color: white;
+    padding: 15px;
+}
+
+
+tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#flightsTable {
+    margin-top: 20px;
+}
+
+tr.conflict {
+    background-color: #f54747;
+}
+
+/* End of Table */

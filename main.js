@@ -1,6 +1,5 @@
 /* TODO
  * implement autosolve
- * implement play button for conflicts 
  */
 
 
@@ -10,6 +9,7 @@ function main()
 {   
     document.getElementById('body').style.display = 'block';
     document.getElementById('inputsWrapper').style.display = 'none';
+    document.getElementById('intro').style.display = 'none';
 
     // Read inputs
 

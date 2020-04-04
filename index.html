@@ -5,7 +5,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
    crossorigin=""/>
-        <link rel="stylesheet" type="text/css" href="style.css" />
+        
         <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
    crossorigin=""></script>
@@ -14,6 +14,14 @@
         
         <script src="Chart.js"></script>
         <link rel="stylesheet" type="text/css" href="Chart.css" />
+
+        
+        <link rel="stylesheet" type="text/css" href="inputs.css" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="stylesheet" type="text/css" href="table.css" />
+        <link rel="stylesheet" type="text/css" href="tabs.css" />
+        <link rel="stylesheet" type="text/css" href="header.css" />
+<!--         -->
 
         <script src="aircraft.js"></script>
         <script src="airports.js"></script>
@@ -34,9 +42,22 @@
                 </div>
                 
                 <div id="inputsWrapper">
-                    <input type="text" id="n" name="n" placeholder="Number of ACFT">
-                    <input type="text" id="t" name="t" placeholder="Time Parameter (in seconds)" >
-                    <button id="runButton" onclick="main()">Generate</button>
+                    <input type="text" id="n" name="n" placeholder="Number of ACFT" />
+                    <input type="text" id="t" name="t" placeholder="Time Parameter (in seconds)" />
+                    <div>
+                        <button id="runButton" class="pinkButton" onclick="main()">Generate</button>
+                    </div>
+                </div>
+
+                <div id="intro">
+                    <p>
+                        The programm uses a list of European airports to generate random flights between any reasonable ADEP/ADES pairs at random departure times. The program will
+                        <ul>
+                            <li>Calculate arrival times (assume flights on the orthodrome, constant speeds and random cruise flight levels)</li>
+                            <li>Display arrival conflicts (flights arriving at the same ADES within a specified time parameter)</li>
+                        </ul>
+
+                    </p>
                 </div>
 
                 <div id="body">                    
@@ -66,7 +87,21 @@
                     <script>
                          document.getElementById('defaultOpen').click();
                     </script>
+
+                    
                 </div>                
+
+                <div id="footerWrapper">
+                    <h1>Members</h1>
+                    <ul>
+                        <li>Andrei Ursulean</li>
+                        <li>Alberto Ismael</li>                    
+                        <li>Cartianu Laura</li>
+                        <li>Giusca Andrada</li>
+                        <li>Sauchea Flavia</li>
+                        <li>Trafi Imane</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </body>

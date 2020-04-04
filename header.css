@@ -1,0 +1,35 @@
+html, #background {
+    background-color: #f7f7f7;
+    /*background-image: url("bg.jpeg");*/
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#wrapper {
+    max-width: 1200px;
+    min-height: 800px;
+    padding: 0;
+    margin: auto;
+    background-color: #fff;
+    border-radius: 25px;
+}
+
+#header h1, #header h2{
+    text-align: center;
+}
+
+#body, #header {
+    margin: 0;    
+    padding: 10px;
+}
+
+#intro {
+    padding: 50px;
+    font-size: larger;
+}
+
+#body {
+    display: none;
+}
