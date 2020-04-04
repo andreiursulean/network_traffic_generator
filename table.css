@@ -1,5 +1,9 @@
 /* Table */
 
+td {
+    text-align: center;
+}
+
 #tableWrapper {
     overflow: scroll;
     margin: auto;

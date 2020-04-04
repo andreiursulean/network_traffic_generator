@@ -66,6 +66,13 @@ function createFlights(n) {
 }
 
 function showFlightsOnMap(flights, map) {
+    if (typeof geodesicLines !== 'undefined') {
+        // Remove old flights
+        for (let i = 0; i < geodesicLines.length; i++) {
+            mainmap.removeLayer(geodesicLines[i]);
+        }
+    }
+    
     geodesicLines = [];
     
     for (let i = 0; i < flights.length; i++) {
@@ -108,7 +115,6 @@ function findConflicts(flights, deltaT) {
             tmp.push({"flight": flights[i], "number": i});
             isConflict = true;
             i++;
-            debugger;
         }
 
         tmp.push({"flight": flights[i], "number": i});
@@ -118,29 +124,6 @@ function findConflicts(flights, deltaT) {
     }
 
     return conflicts;
-
-
-    /*for (i = 1; i < flights.length - 1; i++) {
-        console.log(i);
-
-        if ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000)) {
-            tmp = new Conflict();
-            tmp.push({"flight": flights[i], "number": i});
-
-            while ((flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000) && (i + 1 < flights.length)) {
-                i++;
-                tmp.push({"flight": flights[i], "number": i});
-                
-            }
-
-            // BUG LINE 108
-            
-            conflicts.push(tmp);
-        }
-    }*/
-
-    
-    
 }
 
 function printFlightsTable(flights, conflicts) {
@@ -220,7 +203,29 @@ function drawCharts(conflictData) {
 }
 
 function autosolve() {
-    alert("This method is not yet implemented. Sorry for any inconvenience"); // TODO IMPLEMENT
+    alert("Warning! Experimental method. Use at your own risk"); // TODO IMPLEMENT
+    alert("Initial number of conflicts: " + conflicts.length)
+
+    let unsolved = true; // In order to enter the loop
+    let control = 0;
+
+    while (unsolved && (control++ < 9000)) {
+
+        unsolved = false; // Assume the conflicts to be solved
+
+        for (let i = 0; i < conflicts.length; i++) {
+            conflicts[i].flights[1].delay(1 + deltaT - (conflicts[i].flights[1].eta - conflicts[i].flights[0].eta)/1000);
+            unsolved = true;
+        }
+    }
+
+    // Restart UI
+    conflicts = findConflicts(flights, deltaT);
+    geodesicLines = showFlightsOnMap(flights, mainmap);
+    printFlightsTable(flights, conflicts);
+    let conflictData = compileConflictData(conflicts, flights)
+    drawCharts(conflictData);
+    alert("New number of conflicts: " + conflicts.length)
 }
 
 function compileConflictData(conflicts, flights) {
@@ -253,6 +258,33 @@ function compileConflictData(conflicts, flights) {
     return conflictData;
 }
 
+function animPreviousState() {
+    let nextState = conflicts.length - 1;
+
+    if (state > -1)
+            nextState = state - 1;
+
+    state = nextState;
+    if (state >= 0) {
+/*        // Remove old flights
+        for (let i = 0; i < geodesicLines.length; i++) {
+            mainmap.removeLayer(geodesicLines[i]);
+        }
+*/
+        // Draw new flights
+        geodesicLines = showFlightsOnMap(conflicts[state].flights, mainmap);  
+    }    
+    else if (state == -1) {
+ /*       for (let i = 0; i < geodesicLines.length; i++) {
+            mainmap.removeLayer(geodesicLines[i]);
+        }
+*/
+        geodesicLines = showFlightsOnMap(flights, mainmap);  
+    }
+            
+    console.log("Animation state: " + state);
+}
+
 function animNextState() {
     let nextState = -1;
 
@@ -278,7 +310,7 @@ function animNextState() {
         geodesicLines = showFlightsOnMap(flights, mainmap);  
     }
             
-    console.log(nextState);
+    console.log("Animation state: " + state);
 }
 
 function secondsToHoursString(n) {

@@ -50,9 +50,22 @@
     background-color: #ad22b4;
 }
 
-#animationButton {
-    margin: 10px 35%;
+#animationPrevButton {
+    width: 15%;
+    margin-top: 10px;
+    margin-left: 32%;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
+
+#animationNextButton {
+    width: 15%;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right: 32%;
+}
+
 .map {
     margin: auto;
     height: 600px;

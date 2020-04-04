@@ -1,4 +1,9 @@
-/* TODO
+/** 
+ * Main entry point in the program
+ * 
+ * Global variables (Window members): deltaT, state, mainmap, flights, conflicts
+ * 
+ *  TODO
  * implement autosolve
  */
 
@@ -13,10 +18,11 @@ function main()
 
     // Read inputs
 
-    let deltaT = parseInt(document.getElementById('t').value);
+    deltaT = parseInt(document.getElementById('t').value);
     let n = parseInt(document.getElementById('n').value);
     
-    state = -1;
+    // The state of the animation
+    state = -1; // -1 means display all flights
 
     // Generate map and display airport markers
     mainmap = createMap('mapid');
