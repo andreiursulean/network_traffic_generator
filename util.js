@@ -317,10 +317,20 @@ function secondsToHoursString(n) {
     let q = Math.floor(n/3600);
     let r = n - q * 3600;
     let h = q;
-    q = Math.floor(r / 60);
+
+    if (h < 10)
+        h = "0" + h;
+    
+        q = Math.floor(r / 60);
     r = r - q * 60;
     let m = q;
+
+    if (m < 10)
+        m = "0" + m;
+    
     let s = Math.floor(r);
+    if (s < 10)
+        s = "0" + s;
 
     return h + ":" + m + ":" + s;   
 }

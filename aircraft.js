@@ -8,18 +8,6 @@ const aircraft = [
     },
     {
         "manufacturer":"Boeing",
-        "typeDesignator":"B741",
-        "model":"747-100",
-        "cruiseSpeed":490
-    },
-    {
-        "manufacturer":"Airbus",
-        "typeDesignator":"A388",
-        "model":"380-800",
-        "cruiseSpeed":567
-    },
-    {
-        "manufacturer":"Boeing",
         "typeDesignator":"B738",
         "model":"737-800",
         "cruiseSpeed":455

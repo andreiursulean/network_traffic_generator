@@ -1,6 +1,6 @@
 html, #background {
     background-color: #f7f7f7;
-    /* background-image: url("bg3.jpg");*/ 
+    background-image: url("bg3.png");    
     height: 100%;
     margin: 0;
     padding: 0;
@@ -12,8 +12,10 @@ html, #background {
     min-height: 800px;
     padding: 0;
     margin: auto;
-    background-color: #fff;
+    background-color: #fff; 
     border-radius: 25px;
+    box-shadow: 10px 10px 18px #000;
+    border: 1px solid #000;
 }
 
 #header h1, #header h2{
