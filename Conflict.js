@@ -1,7 +1,8 @@
 class Conflict {
-
-    // So far, this is not used
-    
+    /**
+     * Constructor method
+     * The constructor method takes no parameters and just initializes the arrays flights and numbers
+     */
     constructor() {
         this.flights = [];
         this.numbers = [];

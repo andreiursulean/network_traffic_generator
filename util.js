@@ -1,6 +1,5 @@
 // TODO de facut librarie
 
-
 function createMap(id) {
     var map = L.map(id).setView([55.505, 23.09], 4);
 
@@ -161,30 +160,7 @@ function checkElementInArray(val, arr) {
     return false;
 }
 
-function openTab(evt, tabName) {
-    
-    // Hide all tabcontent elements
-    let tabcontent = document.getElementsByClassName('tabcontent');
-
-    for (let i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = 'none';
-    }
-
-    // set tablinks not active 
-    let tablinks = document.getElementsByClassName('tablinks');
-    for (let i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace('active', '');
-    }
-
-    // Show current tab content
-    document.getElementById(tabName).style.display = 'block';
-
-    // Set current tab link active
-    evt.currentTarget.className += ' active';
-
-}
-
-function drawCharts(conflictData) {
+function createChart(conflictData) {
     let ctx = document.getElementById('statisticsChart').getContext('2d');
     let statisticsChart = new Chart(ctx, {
         type: "bar",
@@ -200,6 +176,8 @@ function drawCharts(conflictData) {
             }
         }
     });
+
+    return statisticsChart;
 }
 
 function autosolve() {
@@ -224,7 +202,8 @@ function autosolve() {
     geodesicLines = showFlightsOnMap(flights, mainmap);
     printFlightsTable(flights, conflicts);
     let conflictData = compileConflictData(conflicts, flights)
-    drawCharts(conflictData);
+    statisticsChart.data = conflictData;
+    statisticsChart.update();
     alert("New number of conflicts: " + conflicts.length)
 }
 
@@ -241,8 +220,7 @@ function compileConflictData(conflicts, flights) {
     };
 
     for (let i = 0; i < conflicts.length; i++) {
-        let index = conflictData.labels.indexOf(conflicts[i].flights[0].ades.icao);//flights[conflicts[i].numbers[0]].ades.icao);
-
+        let index = conflictData.labels.indexOf(conflicts[i].flights[0].ades.icao);
         if (index >= 0) {
             conflictData.datasets[0].data[index] += conflicts[i].numbers.length;            
         }
@@ -266,20 +244,14 @@ function animPreviousState() {
 
     state = nextState;
     if (state >= 0) {
-/*        // Remove old flights
-        for (let i = 0; i < geodesicLines.length; i++) {
-            mainmap.removeLayer(geodesicLines[i]);
-        }
-*/
         // Draw new flights
         geodesicLines = showFlightsOnMap(conflicts[state].flights, mainmap);  
+        document.getElementById("conflictDataIndicator").innerHTML = "Conflict " + state + ", Flights " + conflicts[state].numbers;
     }    
     else if (state == -1) {
- /*       for (let i = 0; i < geodesicLines.length; i++) {
-            mainmap.removeLayer(geodesicLines[i]);
-        }
-*/
+
         geodesicLines = showFlightsOnMap(flights, mainmap);  
+        document.getElementById("conflictDataIndicator").innerHTML = "Showing all Flights";
     }
             
     console.log("Animation state: " + state);
@@ -294,20 +266,14 @@ function animNextState() {
     state = nextState;
 
     if (state >= 0) {
-        // Remove old flights
-        for (let i = 0; i < geodesicLines.length; i++) {
-            mainmap.removeLayer(geodesicLines[i]);
-        }
-
         // Draw new flights
         geodesicLines = showFlightsOnMap(conflicts[state].flights, mainmap);  
+        document.getElementById("conflictDataIndicator").innerHTML = "Conflict " + state + ", Flights " + conflicts[state].numbers;
+        
     }    
     else if (state == -1) {
-        for (let i = 0; i < geodesicLines.length; i++) {
-            mainmap.removeLayer(geodesicLines[i]);
-        }
-
         geodesicLines = showFlightsOnMap(flights, mainmap);  
+        document.getElementById("conflictDataIndicator").innerHTML="Showing all Flights";
     }
             
     console.log("Animation state: " + state);

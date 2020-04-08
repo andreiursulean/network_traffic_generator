@@ -13,13 +13,13 @@
         <script src="https://cdn.jsdelivr.net/npm/leaflet.geodesic"></script>
         
         <script src="Chart.js"></script>
-        <link rel="stylesheet" type="text/css" href="Chart.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/Chart.css" />
         
-        <link rel="stylesheet" type="text/css" href="style.css" />
-        <link rel="stylesheet" type="text/css" href="table.css" />
-        <link rel="stylesheet" type="text/css" href="tabs.css" />
-        <link rel="stylesheet" type="text/css" href="header.css" />
-        <link rel="stylesheet" type="text/css" href="footer.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/style.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/table.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/tabs.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/header.css" />
+        <link rel="stylesheet" type="text/css" href="./styles/intro.css" />
 
         <script src="aircraft.js"></script>
         <script src="airports.js"></script>
@@ -27,6 +27,7 @@
         <script src="Flight.js"></script> 
         <script src="Conflict.js"></script>
         <script src="util.js"></script>
+        <script src="tabs.js"></script>
         <script src="main.js"></script>
     </head>
 
@@ -40,35 +41,49 @@
                 </div>
 
                 <div id="intro">
-                    <p>
-                        The program uses a list of European airports to generate random flights between any reasonable ADEP/ADES pairs at random departure times. The program:
-                    </p>
-                    <ul>
-                        <li>Calculates arrival times (assuming flights on the orthodrome, constant speeds and random cruise flight levels)</li>
-                        <li>Displays arrival conflicts (flights arriving at the same ADES within a specified time parameter)</li>
-                    </ul>
+                    <h2>Welcome to our project!</h2>
+                    <h3>Click on any of the tabs below to find out more.</h3>
+                    <h3>Or click Generate to begin.</h3>
+                    <div class="tab">
+                        <button class="tablinks" onClick="openTab(event, 'requirementsWrapper')" id="introDefaultOpen">Requirements</button>
+                        <button class="tablinks" onClick="openTab(event, 'outputsWrapper')">Outputs</button>
+                        <button class="tablinks" onClick="openTab(event, 'teamWrapper')">Team</button>
+                    </div>
 
-                    <p>
-                        The program will output 3 tabs: Map, Table and Statistics
-                    </p>
-                    <ul>
-                        <li>The map display will show all the flights and allows the user to browse between conflicts </li>
-                        <li>The table display will show all flights and will mark the conflicts with red</li>
-                        <li>The statistics display possible arrival  conflicts per ADES</li>
-                    </ul>
+                    <div id="requirementsWrapper" class="tabcontent">
+                        <h3>
+                            The program uses a list of European airports to generate random flights between any reasonable ADEP/ADES pairs at random departure times. The program:
+                        </h3>
+                        <ul>
+                            <li>Calculates arrival times (assuming flights on the orthodrome, constant speeds and random cruise flight levels)</li>
+                            <li>Displays arrival conflicts (flights arriving at the same ADES within a specified time parameter)</li>
+                        </ul>
+                    </div>
 
-                    <p>
-                        Our team consists of:
-                    </p>
-                    <ul>
-                        <li>Ismael Albert Tranche</li>  
-                        <li>Laura Cartianu</li>
-                        <li>Andrada Giusca</li>                        
-                        <li>Flavia Sauchea</li>
-                        <li>Imane Trafi</li>                        
-                        <li>Andrei Ursulean</li>                  
-                    </ul>
-                    
+                    <div id="outputsWrapper" class="tabcontent">
+                        <h3>
+                            The program will output 3 tabs: Map, Table and Statistics
+                        </h3>
+                        <ul>
+                            <li>The map display will show all the flights and allows the user to browse between conflicts </li>
+                            <li>The table display will show all flights and will mark the conflicts with red</li>
+                            <li>The statistics display possible arrival  conflicts per ADES</li>
+                        </ul>
+                    </div>
+
+                    <div id="teamWrapper" class="tabcontent">
+                        <h3>
+                            Our team consists of:
+                        </h3>
+                        <ul>
+                            <li>Ismael Albert Tranche</li>  
+                            <li>Laura Cartianu</li>
+                            <li>Andrada Giusca</li>                        
+                            <li>Flavia Sauchea</li>
+                            <li>Imane Trafi</li>                        
+                            <li>Andrei Ursulean</li>                  
+                        </ul>
+                    </div>
                 </div>
                 
                 <div id="inputsWrapper">
@@ -81,18 +96,19 @@
 
                 <div id="body">                    
                     <div class="tab">
-                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="defaultOpen">Map</button>
+                        <button class="tablinks" onClick="openTab(event, 'mapWrapper')" id="mainDefaultOpen">Map</button>
                         <button class="tablinks" onClick="openTab(event, 'tableWrapper')">Table</button>
                         <button class="tablinks" onClick="openTab(event, 'statisticsWrapper')">Statistics</button>
                     </div>
                     
                     <div id="mapWrapper" class="tabcontent">
+                        <p id="conflictDataIndicator">Showing all flights</p>
                         <div id="mapid" class="map"></div>
                         <button class="pinkButton" id="animationPrevButton" onclick="animPreviousState()">Previous</button>
                         <button class="pinkButton" id="animationNextButton" onclick="animNextState()">Next</button>
                     </div>
 
-                    <div id="tableWrapper" class="tabcontent">
+                    <div id="tableWrapper" class="tabcontent">                        
                         <table id="flightsTable"></table>
                     </div>
 
@@ -105,7 +121,8 @@
                     <button class="pinkButton" id="autosolveButton" onclick="autosolve();">Autosolve (experimental)</button>
 
                     <script>
-                         document.getElementById('defaultOpen').click();
+                         document.getElementById("introDefaultOpen").click();
+                         
                     </script>
 
                     

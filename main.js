@@ -1,25 +1,30 @@
 /** 
  * Main entry point in the program
  * 
- * Global variables (Window members): deltaT, state, mainmap, flights, conflicts
+ * Global variables (Window members): deltaT, state, mainmap, flights, conflicts, statisticsChart
  * 
- *  TODO
- * implement autosolve
  */
-
-
 
 /*================== MAIN FUNCTION ==================*/
 function main()
 {   
+    // Read inputs
+    deltaT = parseInt(document.getElementById('t').value);
+    let n = parseInt(document.getElementById('n').value);
+    
+    console.log(n);
+    console.log(deltaT);
+
+    if (isNaN(n) || isNaN(deltaT)) {
+        alert("Please insert valid inputs for the number of aircraft and the time parameter");
+        return;
+    }
+
+    // Change UI
     document.getElementById('body').style.display = 'block';
     document.getElementById('inputsWrapper').style.display = 'none';
     document.getElementById('intro').style.display = 'none';
-
-    // Read inputs
-
-    deltaT = parseInt(document.getElementById('t').value);
-    let n = parseInt(document.getElementById('n').value);
+    document.getElementById("mainDefaultOpen").click();
     
     // The state of the animation
     state = -1; // -1 means display all flights
@@ -48,5 +53,6 @@ function main()
     console.log(conflictData);
 
     // Show statistics
-    drawCharts(conflictData);
+    statisticsChart = createChart(conflictData);
+    console.log()
 }

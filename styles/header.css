@@ -1,6 +1,6 @@
 html, #background {
     background-color: #f7f7f7;
-    background-image: url("bg3.png");    
+    background-image: url("../res/bg.png");    
     height: 100%;
     margin: 0;
     padding: 0;
@@ -25,11 +25,6 @@ html, #background {
 #body, #header {
     margin: 0;    
     padding: 10px;
-}
-
-#intro {
-    padding: 50px;
-    font-size: larger;
 }
 
 #body {
