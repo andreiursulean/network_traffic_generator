@@ -138,13 +138,13 @@ function printFlightsTable(flights, conflicts) {
 
         if (isConflict) {
             tableString += '<tr class="conflict"><td>' + i + '</td><td>' + flights[i].ades.icao + '</td><td>' + flights[i].adep.icao + '</td><td>' + 
-            flights[i].atd + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
-            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta + '</td></tr>';
+            flights[i].atd.toUTCString() + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
+            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta.toUTCString() + '</td></tr>';
         }
         else {
             tableString += '<tr><td>'  + i + '</td><td>' + flights[i].ades.icao + '</td><td>' + flights[i].adep.icao + '</td><td>' + 
-            flights[i].atd + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
-            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta + '</td></tr>';
+            flights[i].atd.toUTCString() + '</td><td>' + flights[i].acft.typeDesignator + '</td><td>' + flights[i].fl + '</td><td>' + 
+            metersToNM(flights[i].distance) + '</td><td>' + secondsToHoursString(flights[i].ete) + '</td><td>' + flights[i].eta.toUTCString() + '</td></tr>';
         }
     }
 

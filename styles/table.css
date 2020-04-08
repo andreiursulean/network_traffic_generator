@@ -2,6 +2,11 @@
 
 td {
     text-align: center;
+    padding: 15px;
+}
+
+#flightsTable {
+    width: 100%;
 }
 
 #tableWrapper {
