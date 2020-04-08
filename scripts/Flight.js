@@ -26,7 +26,8 @@ class Flight {
      * Method to calculate the orthodrome distance between 2 points on Earth 
      */
     calculateDistance() {
-        return 2 * (EARTH_RADIUS + this.fl * 0.3041 * 100) * Math.asin(Math.sqrt(Math.pow(Math.sin((this.ades.lat * Math.PI / 180 - this.adep.lat * Math.PI / 180) / 2), 2) +
+        return 2 * (EARTH_RADIUS + this.fl * 0.3041 * 100) * Math.asin(Math.sqrt(Math.pow(
+        Math.sin((this.ades.lat * Math.PI / 180 - this.adep.lat * Math.PI / 180) / 2), 2) +
         Math.cos(this.adep.lat * Math.PI / 180) * Math.cos(this.ades.lat * Math.PI / 180) *
         Math.pow(Math.sin((this.ades.lng * Math.PI / 180 - this.adep.lng * Math.PI / 180) / 2), 2)));
 

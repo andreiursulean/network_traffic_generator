@@ -32,13 +32,11 @@ function createFlights(n) {
         let destinationIndex = Math.round(Math.random() * (airports.length - 1));
         let ades = airports[destinationIndex];
 
-        // Set departure airport
-        
+        // Set departure airport        
         let departureIndex = -1;
         
         while ((departureIndex = Math.round(Math.random() * (airports.length - 1))) == destinationIndex) {
-            // Run so that departure and destination airport are not the same 
-            ;
+            ; // Run so that departure and destination airport are not the same 
         }
 
         let adep = airports[departureIndex];
@@ -57,8 +55,7 @@ function createFlights(n) {
 
         // Generate new flight object
         let newFlight = new Flight(ades, adep, atd, acft, fl);    
-        flights.push(newFlight);
-        
+        flights.push(newFlight);        
     }
 
     return flights;
@@ -84,6 +81,7 @@ function showFlightsOnMap(flights, map) {
 }
 
 function sortFlights(flights) {
+    // Sort by ADES
     for (let i = 0; i < flights.length - 1; i++)
         for (let j = i + 1; j < flights.length; j++)
             if (flights[i].ades.icao > flights[j].ades.icao) {
@@ -92,6 +90,7 @@ function sortFlights(flights) {
                 flights[j] = aux;
             }
 
+    // Sort by ETA
     for (let i = 0; i < flights.length - 1; i++)
         for (let j = i + 1; j < flights.length; j++)
             if (flights[i].ades.icao === flights[j].ades.icao && flights[i].eta > flights[j].eta) {
@@ -105,10 +104,9 @@ function findConflicts(flights, deltaT) {
     let conflicts = [];
 
     for (let i = 0; i < flights.length - 1; i++) {
+        // Create temporary Conflict Object
         let tmp = new Conflict();
-        let isConflict = false;
-
-        
+        let isConflict = false;        
 
         while ((i < flights.length - 1) && (flights[i].ades.icao == flights[i + 1].ades.icao) && (Math.abs(flights[i].eta - flights[i + 1].eta) <= deltaT * 1000)) {            
             tmp.push({"flight": flights[i], "number": i});
@@ -181,18 +179,24 @@ function createChart(conflictData) {
 }
 
 function autosolve() {
-    alert("Warning! Experimental method. Use at your own risk"); // TODO IMPLEMENT
+    // Alert user
+    alert("Warning! Experimental method. Use at your own risk");
     alert("Initial number of conflicts: " + conflicts.length)
 
     let unsolved = true; // In order to enter the loop
     let control = 0;
+    
+    while (unsolved && (control++ < 9000)) { // make sure we don't block the program
 
-    while (unsolved && (control++ < 9000)) {
-
-        unsolved = false; // Assume the conflicts to be solved
+        // Assume the conflicts to be solved
+        unsolved = false; 
 
         for (let i = 0; i < conflicts.length; i++) {
+
+            // Delay first conflict
             conflicts[i].flights[1].delay(1 + deltaT - (conflicts[i].flights[1].eta - conflicts[i].flights[0].eta)/1000);
+            
+            // Previous assumption was wrong
             unsolved = true;
         }
     }
