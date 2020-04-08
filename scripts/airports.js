@@ -1,5 +1,16 @@
 const airports = [
-    {"name":"Henri Coanda International Airport","city":"Bucharest", "country":"Romania","iata":"OTP","icao":"LROP","lat":44.5711111,"lng":26.085,"altitude":"314","timezone":"2","dst":"E"},
+    {
+        "name":"Henri Coanda International Airport",
+        "city":"Bucharest", 
+        "country":"Romania",
+        "iata":"OTP",
+        "icao":"LROP",
+        "lat":44.5711111,
+        "lng":26.085,
+        "altitude":"314",
+        "timezone":"2",
+        "dst":"E"
+    },
     {"name":"Sheremetyevo International Airport","city":"Moscow","country":"Russia","iata":"SVO","icao":"UUEE","lat":55.972599,"lng":37.4146,"altitude":"622","timezone":"3","dst":"N"},
     {"name":"Ataturk International Airport","city":"Istanbul","country":"Turkey","iata":"IST","icao":"LTBA","lat":"40.9768981934","lng":"28.814599990799998","altitude":"163","timezone":"3","dst":"E"},
     {"name":"Eleftherios Venizelos International Airport","city":"Athens","country":"Greece","iata":"ATH","icao":"LGAV","lat":37.9364013672,"lng":23.9444999695,"altitude":"308","timezone":"2","dst":"E"},
