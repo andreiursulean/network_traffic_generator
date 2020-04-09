@@ -199,6 +199,8 @@ function autosolve() {
             // Previous assumption was wrong
             unsolved = true;
         }
+
+        conflicts = findConflicts(flights, deltaT)
     }
 
     // Restart UI
